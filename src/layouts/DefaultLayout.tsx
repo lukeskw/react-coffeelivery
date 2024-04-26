@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 export function DefaultLayout() {
   return (
-    <div className="max-w-screen-lg">
+    <div className="w-full">
       <Header />
       <Outlet />
     </div>

@@ -7,6 +7,9 @@ export default {
         sans: ['"Roboto"', 'sans-serif'],
         baloo: ['"Baloo 2"', 'sans-serif'],
       },
+      bg: {
+        mainBackground: '#FAFAFA',
+      },
     },
   },
   plugins: [],
