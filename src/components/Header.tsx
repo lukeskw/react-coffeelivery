@@ -12,13 +12,13 @@ export function Header() {
       <aside className="flex gap-3">
         <div className="flex items-center gap-1 rounded-md bg-violet-100 px-2 py-2.5">
           <MapPin size={22} weight="fill" className="text-violet-600" />
-          <span className="text-violet-900">Porto Alegre, RS</span>
+          <span className="text-violet-900">Rio de Janeiro, RJ</span>
         </div>
 
         <Link
           to={`cart`}
           aria-disabled={cart.length === 0}
-          className="relative flex items-center rounded-md bg-amber-100 p-2 text-yellow-600 "
+          className="relative flex items-center rounded-md bg-amber-100 p-2 text-yellow-600 aria-disabled:pointer-events-none"
         >
           <ShoppingCart size={22} weight="fill" />
           {cart.length > 0 ? (
