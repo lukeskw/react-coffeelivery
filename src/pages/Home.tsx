@@ -10,12 +10,12 @@ export function Homepage() {
           <div className="flex flex-col gap-16">
             <div className="flex flex-col gap-4">
               <h1 className="font-baloo text-5xl text-stone-800">
-                Encontre o café perfeito para qualquer hora do dia
+                Find the perfect coffee for any time of the day
               </h1>
 
               <span>
-                Com o Coffee Delivery você recebe seu café onde estiver, a
-                qualquer hora
+                With Coffee Delivery, you receive your coffee wherever you are,
+                anytime
               </span>
             </div>
 
@@ -26,7 +26,7 @@ export function Homepage() {
                   size={32}
                   className="rounded-full bg-yellow-600 p-2 text-sm text-slate-50"
                 />
-                <span>Compra simples e segura</span>
+                <span>Simple and secure purchase</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ export function Homepage() {
                   weight="fill"
                   className="rounded-full bg-slate-800 p-2 text-slate-50"
                 />
-                <span>Embalagem mantém o café intacto</span>
+                <span>Package keeps the coffee intact</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -44,7 +44,7 @@ export function Homepage() {
                   weight="fill"
                   className="rounded-full bg-amber-400 p-2 text-slate-50"
                 />
-                <span>Entrega rápida e rastreada</span>
+                <span>Fast and tracked delivery</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -53,12 +53,12 @@ export function Homepage() {
                   weight="fill"
                   className="rounded-full bg-violet-600 p-2 text-slate-50"
                 />
-                <span>O café chega fresquinho até você</span>
+                <span>The coffee arrives fresh to you</span>
               </div>
             </div>
           </div>
 
-          <img src="/images/hero.svg" alt="Café do Coffee Delivery" />
+          <img src="/images/hero.svg" alt="Coffee from Coffee Delivery" />
         </div>
 
         <img
@@ -70,7 +70,7 @@ export function Homepage() {
       </section>
 
       <section className="mx-auto my-0 flex max-w-[1160px] flex-col gap-14 px-5 pb-36 pt-8">
-        <h2 className="font-baloo text-3xl text-stone-700">Nossos cafés</h2>
+        <h2 className="font-baloo text-3xl text-stone-700">Our coffees</h2>
 
         <div className="row grid grid-cols-4 gap-x-8 gap-y-10 ">
           {coffees.map((coffee) => (
