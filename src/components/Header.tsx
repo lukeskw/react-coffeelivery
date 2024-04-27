@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
+import { useUserLocation } from '../hooks/useUserLocation'
 
 export function Header() {
   const cart = ['0', '1']
+  const { location } = useUserLocation()
+
   return (
     <header className="mx-auto my-0 flex max-w-[1160px] items-center justify-between px-5 py-8">
       <Link to="/">
@@ -12,7 +15,7 @@ export function Header() {
       <aside className="flex gap-3">
         <div className="flex items-center gap-1 rounded-md bg-violet-100 px-2 py-2.5">
           <MapPin size={22} weight="fill" className="text-violet-600" />
-          <span className="text-violet-900">Rio de Janeiro, RJ</span>
+          <span className="text-violet-900">{location}</span>
         </div>
 
         <Link
