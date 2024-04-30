@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { useUserLocation } from '../hooks/useUserLocation'
+import { useCart } from '../hooks/useCart'
 
 export function Header() {
-  const cart = ['0', '1']
+  const { carts } = useCart()
   const { location } = useUserLocation()
 
   return (
@@ -20,13 +21,13 @@ export function Header() {
 
         <Link
           to={`cart`}
-          aria-disabled={cart.length === 0}
+          aria-disabled={carts.length === 0}
           className="relative flex items-center rounded-md bg-amber-100 p-2 text-yellow-600 aria-disabled:pointer-events-none"
         >
           <ShoppingCart size={22} weight="fill" />
-          {cart.length > 0 ? (
+          {carts.length > 0 ? (
             <span className="absolute right-0 top-0 flex size-5 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-yellow-600 font-baloo text-sm font-bold text-white ">
-              {cart.length}
+              {carts.length}
             </span>
           ) : null}
         </Link>

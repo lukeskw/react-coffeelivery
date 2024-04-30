@@ -1,25 +1,22 @@
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useCart } from '../hooks/useCart'
+import { useEffect } from 'react'
 export function Success() {
   const { orderId } = useParams()
+  const { orders } = useCart()
+  const navigate = useNavigate()
 
-  const orderInfo = {
-    id: orderId,
-    street: 'test street',
-    number: '12',
-    neighborhood: 'test neighborhood',
-    city: 'Rio de Janeiro',
-    state: 'RJ',
-    paymentMethod: 'credit',
-  }
   const paymentMethod: { [key: string]: string } = {
     credit: 'Credit card',
     debit: 'Debit card',
     cash: 'Cash',
   }
-  if (!orderId) {
-    return null
-  }
+  useEffect(() => {
+    if (!orderId || !orders || orders === undefined) {
+      navigate('/')
+    }
+  }, [navigate, orders, orderId])
 
   return (
     <main className="mx-auto my-0 flex max-w-[1160px] items-end justify-between gap-10 px-5 py-20">
@@ -45,12 +42,13 @@ export function Success() {
                 <span>
                   Deliver on{' '}
                   <strong>
-                    {orderInfo.street}, {orderInfo.number}
+                    {orders?.order.street}, {orders?.order.number}
                   </strong>
                 </span>
 
                 <span>
-                  {orderInfo.neighborhood} - {orderInfo.city},{orderInfo.state}
+                  {orders?.order.neighborhood} - {orders?.order.city},
+                  {orders?.order.state}
                 </span>
               </div>
             </div>
@@ -77,7 +75,9 @@ export function Success() {
               <div className="flex flex-col">
                 <span>Payment on delivery</span>
 
-                <strong>{paymentMethod[orderInfo.paymentMethod]}</strong>
+                <strong>
+                  {orders && paymentMethod[orders?.order.paymentMethod]}
+                </strong>
               </div>
             </div>
           </div>

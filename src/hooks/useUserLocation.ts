@@ -9,7 +9,7 @@ const options = {
 }
 
 export const useUserLocation = () => {
-  const [location, setLocation] = useState('Rio de Janeiro, RJ')
+  const [location, setLocation] = useState('No location provided')
 
   async function success(pos: GeolocationPosition) {
     try {
@@ -58,7 +58,7 @@ export const useUserLocation = () => {
       console.log('Geolocation is not supported by this browser.')
       setLocation('Rio de Janeiro, RJ')
     }
-  }, [])
+  }, [location])
   return {
     location,
   }

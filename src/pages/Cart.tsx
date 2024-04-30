@@ -17,7 +17,9 @@ import { QuantityInput } from '../components/Form/QuantityInput.tsx'
 import { TextInput } from '../components/Form/TextInput.tsx'
 import { Radio } from '../components/Form/Radio.tsx'
 import { Fragment } from 'react/jsx-runtime'
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { useCart } from '../hooks/useCart.ts'
+import { useNavigate } from 'react-router-dom'
 
 type FormInputs = {
   zip: number
@@ -48,48 +50,16 @@ export type OrderInfo = z.infer<typeof newOrder>
 const shippingPrice = 3.5
 
 export function Cart() {
-  const [cart, setCart] = useState([
-    {
-      id: '0',
-      quantity: 1,
-    },
-    {
-      id: '8',
-      quantity: 2,
-    },
-  ])
+  const navigate = useNavigate()
+  const {
+    carts,
+    incrementItemQuantity,
+    decrementItemQuantity,
+    removeItem,
+    checkout,
+  } = useCart()
 
-  function checkout() {}
-  function incrementItemQuantity(id) {
-    setCart((state) =>
-      state.map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity: item.quantity + 1 }
-        }
-        return item
-      }),
-    )
-  }
-  function decrementItemQuantity(id) {
-    setCart((state) =>
-      state.map((item) => {
-        if (item.id === id) {
-          if (item.quantity > 1) {
-            return {
-              ...item,
-              quantity: item.quantity - 1,
-            }
-          }
-        }
-        return item
-      }),
-    )
-  }
-  function removeItem(id) {
-    setCart((state) => state.filter((item) => item.id !== id))
-  }
-
-  const coffeesInCart = cart.map((item) => {
+  const coffeesInCart = carts.map((item) => {
     const coffeeInfo = coffees.find((coffee) => coffee.id === item.id)
 
     if (!coffeeInfo) {
@@ -102,7 +72,17 @@ export function Cart() {
     }
   })
 
-  const totalItemsPrice = 50
+  const totalItemsPrice = coffeesInCart.reduce((previousValue, currentItem) => {
+    return (previousValue += currentItem.price * currentItem.quantity)
+  }, 0)
+
+  useEffect(() => {
+    if (coffeesInCart.length === 0) {
+      setTimeout(() => {
+        navigate('/')
+      }, 3000)
+    }
+  }, [coffeesInCart, navigate])
 
   const {
     register,
@@ -128,11 +108,18 @@ export function Cart() {
   }
 
   const handleOrderCheckout: SubmitHandler<FormInputs> = (data) => {
-    if (cart.length === 0) {
+    if (carts.length === 0) {
       return alert('You must need to add at least one coffee to your cart')
     }
 
-    checkout(data)
+    const newOrder = {
+      id: crypto.randomUUID(),
+      order: data,
+      items: coffeesInCart,
+      totalPrice: totalItemsPrice + shippingPrice,
+    }
+
+    checkout(newOrder)
   }
   return (
     <main className="mx-auto my-0 flex max-w-[1160px] gap-8 px-5 py-10">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { QuantityInput } from './Form/QuantityInput'
 import { CheckFat, ShoppingCart } from '@phosphor-icons/react'
+import { useCart } from '../hooks/useCart'
 
 type CardProps = {
   coffee: {
@@ -14,9 +15,9 @@ type CardProps = {
 }
 
 export function Card({ coffee }: CardProps) {
+  const { addItem, carts } = useCart()
   const [quantity, setQuantity] = useState(1)
   const [isItemAdded, setIsItemAdded] = useState(false)
-  const addItem = (i) => {}
 
   function incrementQuantity() {
     setQuantity((state) => state + 1)
@@ -48,7 +49,7 @@ export function Card({ coffee }: CardProps) {
         clearTimeout(timeout)
       }
     }
-  }, [isItemAdded])
+  }, [isItemAdded, carts])
 
   return (
     <div className="flex w-64 flex-col rounded-ee-3xl rounded-ss-md bg-zinc-100 px-5 pb-5 pt-0 text-center">
