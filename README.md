@@ -28,6 +28,8 @@ CoffeeLivery is a simple application to manage a shopping cart for a fictional c
 
 <p align="center">
 
+https://github.com/lukeskw/react-coffeelivery/assets/49079033/20230e68-9261-459f-94ff-ee3e29fc39a1
+
 </p>
 
 ## 🏁 Getting Started <a name = "getting_started_en"></a>
